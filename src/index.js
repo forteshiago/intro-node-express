@@ -38,7 +38,7 @@ app.put("/projects/:id", (request, response) => {
 
     if(projectIndex < 0){
         //informar status de nao encontrado!
-        return response.status(400).json({error:"Projeto nao encontrado!"});
+        return response.status(400).json({"error update":"Projeto nao encontrado!"});
     };
 
     const project = {
@@ -57,6 +57,11 @@ app.delete("/projects/:id", (request, response) => {
     const { id } = request.params;
 
     const projectIndex = projects.findIndex((project) => project.id == id);
+
+    if(projectIndex < 0){
+        //informar status de nao encontrado!
+        return response.status(400).json({"error delete":"Projeto nao encontrado!"});
+    };
 
     return response.json(projects.splice(projectIndex, 1));
 });
